@@ -1,7 +1,7 @@
 # Development Log – The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** David Kaauwai
+**Student ID:** 826497939
 
 > Instructions: Write at least four dated entries. Required entry types are marked below.
 > Two to five sentences per entry is sufficient. Write entries as you go, not all in one
@@ -10,12 +10,17 @@
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – May 10, 2026, 6:45pm : Initial Plan
 
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
+I will implement this project in two phases: 
 
-_Your entry here._
+Phase 1: (Dijkstra precomputation) to build a distance table between all critical nodes (spawn, exit, relics).
+
+Phase 2: (branch-and-bound search) to find the optimal relic visitation order. 
+
+I expect Phase 1 to be a straightforward implementation of dijkstras algo, and I Phase 2 (pruning with lower bounds) will present a greater challenge. 
+
+I will test Dijkstra independently on a small graph first, then validate full solution against provided test cases.
 
 ---
 
