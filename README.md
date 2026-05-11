@@ -64,38 +64,28 @@ Different permutations of the orders of relics produce different fuel costs, so 
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
 
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
-
 - **For nodes already finalized (in S):**
-  _Your answer here._
+  A finalized node's distance is the true shortest path from the sources.
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+  The value of a not finalized node is the cheapest path which torchbearer has already discovered which only uses finalized nodes as its intermediate stops. 
 
 ### Part 3b: Why Each Phase Holds
 
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
-
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+  All sources start with distance = 0. All other nodes have value = \infty 
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+  Non-negative edge weights guarantee that no future path through other nodes may be shorter once a node is finalized. Therefore the finalized distance of each node is optimized.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+  The invariant guarantees that all reachable nodes are finalized with shortest path distances from the sources, which guarantess that the distance table is accurate for all future routing decisions.
 
 ### Part 3c: Why This Matters for the Route Planner
 
-> One sentence connecting correct distances to correct routing decisions.
-
-_Your answer here._
+Finding the guaranteed shortest path distances means that torchbearer will evaluate the true cost of all relic visting orders ensuring the final optimal route unmarred by inaccurate intermediate costs. 
 
 ---
 
