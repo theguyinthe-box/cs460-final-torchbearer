@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: David Kaauwai
+Student ID: 826497939
 
 INSTRUCTIONS
 ------------
@@ -34,7 +34,10 @@ def explain_problem():
 
     TODO
     """
-    return "TODO"
+    return """Part 1: Problem Analysis
+    - Why a single shortest-path run from S is not enough: The shortest path or the least number of nodes visited by the torchbearer doesn't gurantee that the minimum fuel will consumed, it doesn't even guarantee that the torchbearer will not run out of fuel before it reaches the end. In other words, a single shortest path only reaches one specific node, it doesn't decide which relic to visit first to optimally reserve its fuel. 
+    - What decision remains after all inter-location costs are known: The only decision that remains once the torchbearer knows all interlocation costs is to determine the order of the relics it'll be retrieving.
+    - Why this requires a search over orders (one sentence): Different permutations of the orders of relics produce different fuel costs, so computing a single path would not be guaranteed to find the route that costs the minimum fuel. """
 
 
 # =============================================================================
