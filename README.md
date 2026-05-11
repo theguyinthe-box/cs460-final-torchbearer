@@ -1,7 +1,7 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** David Kaauwai
+**Student ID:** 826497939
 **Course:** CS 460 – Algorithms | Spring 2026
 
 > This README is your project documentation. Write it the way a developer would document
@@ -17,13 +17,13 @@
 > per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
+ The shortest path or the least number of nodes visited by the torchbearer doesn't gurantee that the minimum fuel will consumed, it doesn't even guarantee that the torchbearer will not run out of fuel before it reaches the end. In other words, a single shortest path only reaches one specific node, it doesn't decide which relic to visit first to optimally reserve its fuel. 
 
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+The only decision that remains once the torchbearer knows all interlocation costs is to determine the order of the relics it'll be retrieving. 
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+Different permutations of the orders of relics produce different fuel costs, so computing a single path would not be guaranteed to find the route that costs the minimum fuel. 
 
 ---
 
