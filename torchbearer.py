@@ -31,8 +31,6 @@ def explain_problem():
     str
         Your Part 1 README answers, written as a string.
         Must match what you wrote in README Part 1.
-
-    TODO
     """
     return """Part 1: Problem Analysis
     - Why a single shortest-path run from S is not enough: The shortest path or the least number of nodes visited by the torchbearer doesn't gurantee that the minimum fuel will consumed, it doesn't even guarantee that the torchbearer will not run out of fuel before it reaches the end. In other words, a single shortest path only reaches one specific node, it doesn't decide which relic to visit first to optimally reserve its fuel. 
@@ -56,10 +54,9 @@ def select_sources(spawn, relics, exit_node):
     -------
     list[node]
         No duplicates. Order does not matter.
-
-    TODO
     """
-    pass
+    sources = [spawn, exit_node] + relics
+    return sources
 
 
 def run_dijkstra(graph, source):
@@ -75,10 +72,24 @@ def run_dijkstra(graph, source):
     dict[node, float]
         Minimum cost from source to every node in graph.
         Unreachable nodes map to float('inf').
-
-    TODO
     """
-    pass
+    distance = {node: float('inf') for node in graph}
+    distance[source] = 0
+    priority_q = [(0,source)]
+
+    while priority_q:
+        dist, curr = heapq.heappop(priority_q)
+
+        #skip if better path found
+        if dist > distance[curr]:
+            continue
+
+        if curr in graph:
+            for next, weight in graph[curr]:
+                if distance[curr] + weight < distance[next]:
+                    distance[next] = distance[curr] + weight
+                    heapq.heappush(priority_q,(distance[next],next))
+    return distance
 
 
 def precompute_distances(graph, spawn, relics, exit_node):
@@ -95,10 +106,14 @@ def precompute_distances(graph, spawn, relics, exit_node):
     dict[node, dict[node, float]]
         Nested structure supporting dist_table[u][v] lookups
         for every source u your design requires.
-
-    TODO
     """
-    pass
+    sources = select_sources(spawn,relics,exit_node)
+    distance_tbl = {}
+
+    for source in sources:
+        distance_tbl[source] = run_dijkstra(graph, source)
+        
+    return distance_tbl
 
 
 # =============================================================================
