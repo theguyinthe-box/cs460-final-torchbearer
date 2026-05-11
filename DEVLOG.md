@@ -10,7 +10,7 @@
 
 ---
 
-## Entry 1 – May 10, 2026, 6:45pm : Initial Plan
+## Entry 1 – May 10, 2026, 6:45pm: Initial Plan
 
 I will implement this project in two phases: 
 
@@ -18,7 +18,7 @@ Phase 1: (Dijkstra precomputation) to build a distance table between all critica
 
 Phase 2: (branch-and-bound search) to find the optimal relic visitation order. 
 
-I expect Phase 1 to be a straightforward implementation of dijkstras algo, and I Phase 2 (pruning with lower bounds) will present a greater challenge. 
+I expect Phase 1 to be a straightforward implementation of dijkstras algo, and I expect Phase 2 (pruning with lower bounds) will present a greater challenge. 
 
 I will test Dijkstra independently on a small graph first, then validate full solution against provided test cases.
 
@@ -54,8 +54,8 @@ _Your entry here._
 
 | Part | Estimated Hours |
 |---|---|
-| Part 1: Problem Analysis | |
-| Part 2: Precomputation Design | |
+| Part 1: Problem Analysis | ~1.5 |
+| Part 2: Precomputation Design | ~1.5 |
 | Part 3: Algorithm Correctness | |
 | Part 4: Search Design | |
 | Part 5: State and Search Space | |

@@ -127,11 +127,31 @@ def dijkstra_invariant_check():
     str
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
-
-    TODO
     """
-    return "TODO"
 
+
+    return """### Part 3a: What the Invariant Means
+
+- **For nodes already finalized (in S):**
+  A finalized node's distance is the true shortest path from the sources.
+
+- **For nodes not yet finalized (not in S):**
+  The value of a not finalized node is the cheapest path which torchbearer has already discovered which only uses finalized nodes as its intermediate stops. 
+
+### Part 3b: Why Each Phase Holds
+
+- **Initialization : why the invariant holds before iteration 1:**
+  All sources start with distance = 0. All other nodes have value = \infty 
+
+- **Maintenance : why finalizing the min-dist node is always correct:**
+  Non-negative edge weights guarantee that no future path through other nodes may be shorter once a node is finalized. Therefore the finalized distance of each node is optimized.
+
+- **Termination : what the invariant guarantees when the algorithm ends:**
+  The invariant guarantees that all reachable nodes are finalized with shortest path distances from the sources, which guarantess that the distance table is accurate for all future routing decisions.
+
+### Part 3c: Why This Matters for the Route Planner
+
+Finding the guaranteed shortest path distances means that torchbearer will evaluate the true cost of all relic visting orders ensuring the final optimal route unmarred by inaccurate intermediate costs. """
 
 # =============================================================================
 # PART 4
