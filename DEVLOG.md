@@ -31,6 +31,8 @@ I will test Dijkstra independently on a small graph first, then validate full so
 
 Completed Phase one and all readmes for phase one. Completed devlog for nights work.
 No bugs so far! dijstra does the thing with current tests. 
+had dinner during time and pushed after I got back, not great practice, 
+but I had garlic naan calling my name like a siren. 
 
 ---
 
