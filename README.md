@@ -35,8 +35,9 @@ Different permutations of the orders of relics produce different fuel costs, so 
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| spawn | starting poin need shortest paths from S to all relics and exit for routing decision making |
+| relics | ojectices. need shortest paths from each relic to remaining relics and exit for routing decision making |
+| exit | the exit. need shortest paths from exit to verify that tourchbearer can reach the exit |
 
 ### Part 2b: Distance Storage
 
@@ -44,20 +45,20 @@ Different permutations of the orders of relics produce different fuel costs, so 
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | nested dictionary dict[node,dict[node,float]|
+| What the keys represent | outer key is source node, inner key is destination node. |
+| What the values represent | the shortest distance from source to the next destination |
+| Lookup time complexity | O(1) |
+| Why O(1) lookup is possible | Direct key lookup in a python dict is a constant time operation. |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** k + 2 where k is the number of relic nodes plus start node and exit node. 
+- **Cost per run:** O(m log n)
+- **Total complexity:** O((k+2)m log n) = O(km log n)
+- **Justification (one line):** Dijkstra runs from k+2 sources: spawn, exit_node, and k relic nodes. Each run processes all edges within a heap operation. 
 
 ---
 
