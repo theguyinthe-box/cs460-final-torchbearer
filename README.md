@@ -36,7 +36,7 @@ Different permutations of the orders of relics produce different fuel costs, so 
 | Source Node Type | Why it is a source |
 |---|---|
 | spawn | starting poin need shortest paths from S to all relics and exit for routing decision making |
-| relics | ojectices. need shortest paths from each relic to remaining relics and exit for routing decision making |
+| relics | ojectives. need shortest paths from each relic to remaining relics and exit for routing decision making |
 | exit | the exit. need shortest paths from exit to verify that tourchbearer can reach the exit |
 
 ### Part 2b: Distance Storage
