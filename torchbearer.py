@@ -206,11 +206,21 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
     tuple[float, list[node]]
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
-
-    TODO
     """
-    pass
+    if not relics:
+        #no relics/relics empty, poor torchbearer just go from start to exit and calls it a day
+        cost = dist_table[spawn].get(exit_node,float('inf'))
+        return (cost,[])
 
+    #initialize best with a 'NULL' or inf value and an empty list to insert jun...I mean relics into
+    best = [float('inf'), []] 
+
+    remaining_relix = relics
+    _explore(dist_table,spawn,remaining_relix,[],0,exit_node,best)
+
+    if best[0] == float('inf'):
+        return (float('inf'),[])
+    return (best[0],best[1])
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
              cost_so_far, exit_node, best):
