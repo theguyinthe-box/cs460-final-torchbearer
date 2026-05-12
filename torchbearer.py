@@ -167,7 +167,22 @@ def explain_search():
 
     TODO
     """
-    return "TODO"
+    return """### Why Greedy Fails
+
+- **The failure mode:** A greedy torchbearer picks the closest relic, but does not consider that the closest relic has after it a path that will incur a much greater cost that some marginally more expensive path now. 
+- **Counter-example setup:** Consider a 2 relic setup, relics = {A,B} and then and start and exit node. with values dict {(start,A),1),(start,B),3),(A,B),10),(B,A),3),((A,end),2),((B,end),4)} and a table:
+| from/to | A | B  | End |
+| Start   | 1 | 3  | x   |
+|   A     | x | 10 | 2   | 
+|   B     | 3 | x  | 4   |
+
+- **What greedy picks:** Start->A->B->End cost = 15
+- **What optimal picks:** Start->B->A->End cost = 8
+- **Why greedy loses:** Greedy is almost double (!!) the cost of the optimal selection. Choosing A first locks Torchbearer into a very expensive 10 fuel cost path to reach B. 
+
+### What the Algorithm Must Explore
+
+- Torchbearer's algorithm has to exhaustively explore all the possible **orders** of relics to be visted in order to guarantee finding the minimum-cost, optimal, route."""
 
 
 # =============================================================================
