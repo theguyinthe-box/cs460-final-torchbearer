@@ -103,9 +103,9 @@ Finding the guaranteed shortest path distances means that torchbearer will evalu
 
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Current location | current_loc | node | current node being consdiered by torchbearer |
+| Relics already collected | relics_visited_order | list | list of finalized order of relics to visit |
+| Fuel cost so far | cost_so_far | float | cost of fuel in current branching algorithm |
 
 ### Part 5b: Data Structure for Visited Relics
 
