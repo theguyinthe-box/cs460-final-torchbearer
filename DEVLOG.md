@@ -68,29 +68,45 @@ Traceback (most recent call last):
            ^^^^^^^^^
 AssertionError: Test 1 FAILED: expected 4, got 6
 
+table for test 1
+
+f\t | B | C | D | T |
+|---|---|---|---|---|
+| S | 1 | 2 | 2 | x |
+| B | x | x | 1 | 1 |
+| C | 1 | x | x | 1 |
+| D | 1 | 1 | x | x | 
+
+Three possible paths:
+S->B->D->C->T = 4
+S->D->C->B->T = 5
+S->D->B->C->T = 5
+
+after running debugger, realized algorithm is running over paths that don't even exist. eg: S->C->B->D->T = not possible no exit on D should be pruning.
+
+
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – May 12 2:15am: Post-Implementation Reflection
 
-> Required. Written after your implementation is complete. Describe what you would
-> change or improve given more time.
+consdidering all current tests have been passed, I'd most change going to bed at a reasonable hour. 
 
-_Your entry here._
+I'll turn this in in the morning after one last look over for completeness, but I think this biggest thing I would do additionally would be the development of more edge case tests. and more complicated tests that would push the limits of the algo and provide some empirical evidence of the theoretical optimality. 
 
+Anyway, it was a fun assignment. neat to think about. maybe consider A* and dijkstra's comparison in a future class since both with branch and bounding. A* should do better, but you gotta introduce heuristics which I understand might be outside the scope of the class.
 ---
 
-## Final Entry – [Date]: Time Estimate
+## Final Entry – May 12 2:26am: Time Estimate
 
-> Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
 
 | Part | Estimated Hours |
 |---|---|
 | Part 1: Problem Analysis | ~45 |
 | Part 2: Precomputation Design | ~90 |
-| Part 3: Algorithm Correctness | |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | ~60(May 10) + |
-| **Total** | |
+| Part 3: Algorithm Correctness | ~30 |
+| Part 4: Search Design | ~45 |
+| Part 5: State and Search Space | ~60 |
+| Part 6: Pruning | ~20 |
+| Part 7: Implementation | lost track |
+| README and DEVLOG writing | ~60(May 10) + lost track | %aren't the above in the README. idk what you want. 
+| **Total** | a heckin lot |

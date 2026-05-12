@@ -27,7 +27,6 @@ Different permutations of the orders of relics produce different fuel costs, so 
 |---|---|
 | spawn | starting point need shortest paths from S to all relics and exit for routing decision making |
 | relics | ojectives. need shortest paths from each relic to remaining relics and exit for routing decision making |
-| exit | the exit. need shortest paths from exit to verify that tourchbearer can reach the exit |
 
 ### Part 2b: Distance Storage
 
@@ -153,4 +152,6 @@ if cost_so_for + low_bound >= best[0], then all possible complete paths in the c
 > Bullet list. If none beyond lecture notes, write that.
 
 - https://artint.info/html1e/ArtInt_63.html
+- https://stanford.edu/class/ee364b/lectures/bb_notes.pdf
+- https://web.tecnico.ulisboa.pt/mcasquilho/compute/_linpro/TaylorB_module_c.pdf
 - https://docs.python.org/3/tutorial/datastructures.html (for Sets, lists, and Dicts)
