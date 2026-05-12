@@ -249,13 +249,14 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,cos
     None
         Updates best in place.
 
-    TODO
+
     Implement: base case, pruning, recursive case, backtracking.
 
     REQUIRED: Add a 1-2 sentence comment near your pruning condition
     explaining why it is safe (cannot skip the optimal solution).
-    This comment is graded.
+    This comment is graded. *raspberries* 
     """
+
     #base case: torchbearer goto exit after visiting all relics. 
     if not relics_remaining:
         total_cost = cost_so_far + dist_table[current_loc].get(exit_node, float('inf'))
@@ -269,7 +270,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,cos
     for relic in relics_remaining:
         min_cost = dist_table[current_loc].get(relic,float('inf'))
         low_bound += min_cost
-    low_bound += dist_table(current_loc).get(exit_node, float('int'))
+    low_bound += dist_table[current_loc].get(exit_node, float('inf'))
 
     #pruning if current branch >= best[0]
     if cost_so_far + low_bound >= best[0]:
@@ -318,10 +319,8 @@ def solve(graph, spawn, relics, exit_node):
     """
     #pre-compute distances returns a dictionary distance_tbl which has run dijksra
     #on each node. no reason to copy it twice. 
-    return find_optimal_route(precompute_distances(graph,spawn,relics,exit_node),
-                              spawn,
-                              relics,
-                              exit_node)
+    #dist_tbl = precompute_distances(graph,spawn,relics,exit_node)
+    return find_optimal_route(precompute_distances(graph,spawn,relics,exit_node),spawn,relics,exit_node)
 
 
 # =============================================================================
