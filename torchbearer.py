@@ -228,13 +228,7 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
         return (float('inf'),[])
     return (best[0],best[1])
 
-def _explore(dist_table, 
-             current_loc, 
-             relics_remaining, 
-             relics_visited_order,
-             cost_so_far, 
-             exit_node, 
-             best):
+def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,cost_so_far, exit_node, best):
     """
     Recursive helper for find_optimal_route.
 
@@ -270,14 +264,14 @@ def _explore(dist_table,
             best[1] = relics_visited_order[:]
         return
     
-    #determin minimum cost to finish in this current 
+    #determine minimum cost to finish in this current 
     low_bound = 0
     for relic in relics_remaining:
         min_cost = dist_table[current_loc].get(relic,float('inf'))
         low_bound += min_cost
     low_bound += dist_table(current_loc).get(exit_node, float('int'))
 
-    #pruning if current branch not < best[0]
+    #pruning if current branch >= best[0]
     if cost_so_far + low_bound >= best[0]:
         return
     
@@ -320,9 +314,14 @@ def solve(graph, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    TODO
+    
     """
-    pass
+    #pre-compute distances returns a dictionary distance_tbl which has run dijksra
+    #on each node. no reason to copy it twice. 
+    return find_optimal_route(precompute_distances(graph,spawn,relics,exit_node),
+                              spawn,
+                              relics,
+                              exit_node)
 
 
 # =============================================================================
