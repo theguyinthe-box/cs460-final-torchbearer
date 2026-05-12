@@ -81,6 +81,7 @@ Finding the guaranteed shortest path distances means that torchbearer will evalu
 
 - **The failure mode:** A greedy torchbearer picks the closest relic, but does not consider that the closest relic has after it a path that will incur a much greater cost that some marginally more expensive path now. 
 - **Counter-example setup:** Consider a 2 relic setup, relics = {A,B} and then and start and exit node. with values dict {(start,A),1),(start,B),3),(A,B),10),(B,A),3),((A,end),2),((B,end),4)} and a table:
+
 | from/to | A | B | End |
 |---|---|---|---|
 | Start | 1 | 3 | x |
