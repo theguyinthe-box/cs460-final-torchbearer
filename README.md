@@ -4,17 +4,9 @@
 **Student ID:** 826497939
 **Course:** CS 460 – Algorithms | Spring 2026
 
-> This README is your project documentation. Write it the way a developer would document
-> their design decisions , bullet points, brief justifications, and concrete examples where
-> required. You are not writing an essay. You are explaining what you built and why you built
-> it that way. Delete all blockquotes like this one before submitting.
-
 ---
 
 ## Part 1: Problem Analysis
-
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
  The shortest path or the least number of nodes visited by the torchbearer doesn't gurantee that the minimum fuel will consumed, it doesn't even guarantee that the torchbearer will not run out of fuel before it reaches the end. In other words, a single shortest path only reaches one specific node, it doesn't decide which relic to visit first to optimally reserve its fuel. 
@@ -31,8 +23,6 @@ Different permutations of the orders of relics produce different fuel costs, so 
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
-
 | Source Node Type | Why it is a source |
 |---|---|
 | spawn | starting poin need shortest paths from S to all relics and exit for routing decision making |
@@ -40,8 +30,6 @@ Different permutations of the orders of relics produce different fuel costs, so 
 | exit | the exit. need shortest paths from exit to verify that tourchbearer can reach the exit |
 
 ### Part 2b: Distance Storage
-
-> Fill in the table. No prose required.
 
 | Property | Your answer |
 |---|---|
@@ -52,8 +40,6 @@ Different permutations of the orders of relics produce different fuel costs, so 
 | Why O(1) lookup is possible | Direct key lookup in a python dict is a constant time operation. |
 
 ### Part 2c: Precomputation Complexity
-
-> State the total complexity and show the arithmetic. Two to three lines max.
 
 - **Number of Dijkstra runs:** k + 2 where k is the number of relic nodes plus start node and exit node. 
 - **Cost per run:** O(m log n)
@@ -93,29 +79,25 @@ Finding the guaranteed shortest path distances means that torchbearer will evalu
 
 ### Why Greedy Fails
 
-> State the failure mode. Then give a concrete counter-example using specific node names
-> or costs (you may use the illustration example from the spec). Three to five bullets.
+- **The failure mode:** A greedy torchbearer picks the closest relic, but does not consider that the closest relic has after it a path that will incur a much greater cost that some marginally more expensive path now. 
+- **Counter-example setup:** Consider a 2 relic setup, relics = {A,B} and then and start and exit node. with values dict {(start,A),1),(start,B),3),(A,B),10),(B,A),3),((A,end),2),((B,end),4)} and a table:
+| from/to | A | B | End |
+| Start | 1 | 3 | x |
+| A | x | 10 | 2 | 
+| B | 3 | x | 4 |
 
-- **The failure mode:** _Your answer here._
-- **Counter-example setup:** _Your answer here._
-- **What greedy picks:** _Your answer here._
-- **What optimal picks:** _Your answer here._
-- **Why greedy loses:** _Your answer here._
+- **What greedy picks:** Start->A->B->End cost = 15
+- **What optimal picks:** Start->B->A->End cost = 8
+- **Why greedy loses:** Greedy is almost double (!!) the cost of the optimal selection. Choosing A first locks Torchbearer into a very expensive 10 fuel cost path to reach B. 
 
 ### What the Algorithm Must Explore
 
-> One bullet. Must use the word "order."
-
-- _Your answer here._
-
+- Torchbearer's algorithm has to exhaustively explore all the possible **orders** of relics to be visted in order to guarantee finding the minimum-cost, optimal, route.  
 ---
 
 ## Part 5: State and Search Space
 
 ### Part 5a: State Representation
-
-> Document the three components of your search state as a table.
-> Variable names here must match exactly what you use in torchbearer.py.
 
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
