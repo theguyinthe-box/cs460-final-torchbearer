@@ -216,14 +216,25 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
     best = [float('inf'), []] 
 
     remaining_relix = relics
-    _explore(dist_table,spawn,remaining_relix,[],0,exit_node,best)
+    _explore(dist_table,
+             spawn,
+             remaining_relix,
+             [],
+             0,
+             exit_node,
+             best)
 
     if best[0] == float('inf'):
         return (float('inf'),[])
     return (best[0],best[1])
 
-def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
-             cost_so_far, exit_node, best):
+def _explore(dist_table, 
+             current_loc, 
+             relics_remaining, 
+             relics_visited_order,
+             cost_so_far, 
+             exit_node, 
+             best):
     """
     Recursive helper for find_optimal_route.
 
@@ -251,8 +262,44 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    #base case: torchbearer goto exit after visiting all relics. 
+    if not relics_remaining:
+        total_cost = cost_so_far + dist_table[current_loc].get(exit_node, float('inf'))
+        if total_cost < best[0]:
+            best[0] = total_cost
+            best[1] = relics_visited_order[:]
+        return
+    
+    #determin minimum cost to finish in this current 
+    low_bound = 0
+    for relic in relics_remaining:
+        min_cost = dist_table[current_loc].get(relic,float('inf'))
+        low_bound += min_cost
+    low_bound += dist_table(current_loc).get(exit_node, float('int'))
 
+    #pruning if current branch not < best[0]
+    if cost_so_far + low_bound >= best[0]:
+        return
+    
+    #recursion, my love: traverse the tree and find the relics GO!GO!GO!
+    for next in relics_remaining:
+        next_cost = dist_table[current_loc].get(next, float('inf'))
+
+        #if \exist Path -> _explore(TM)
+        if next_cost != float('inf'):
+            relics_remaining.remove(next)
+            relics_visited_order.add(next)
+
+            _explore(dist_table,
+                     next,
+                     relics_remaining,
+                     relics_visited_order,
+                     cost_so_far + next_cost,
+                     exit_node,
+                     best)
+            
+            relics_visited_order.pop()
+            relics_remaining.add(next)
 
 # =============================================================================
 # PIPELINE
