@@ -283,7 +283,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,cos
         #if \exist Path -> _explore(TM)
         if next_cost != float('inf'):
             relics_remaining.remove(next)
-            relics_visited_order.add(next)
+            relics_visited_order.append(next)
 
             _explore(dist_table,
                      next,
