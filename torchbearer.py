@@ -226,6 +226,7 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
     if best[0] == float('inf'):
         return (float('inf'),[])
+    
     return (best[0],best[1])
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,cost_so_far, exit_node, best):
@@ -340,7 +341,7 @@ def _run_tests():
         'T': []
     }
     cost, order = solve(graph_1, 'S', ['B', 'C', 'D'], 'T')
-    assert cost == 4, f"Test 1 FAILED: expected 4, got {cost}"
+    assert cost == 4, print(f"Test 1 FAILED: expected 4, got {cost}")
     print(f"  Test 1 passed  cost={cost}  order={order}")
 
     # Test 2: Single relic. Optimal cost = 5.
@@ -350,7 +351,7 @@ def _run_tests():
         'T': []
     }
     cost, order = solve(graph_2, 'S', ['R'], 'T')
-    assert cost == 5, f"Test 2 FAILED: expected 5, got {cost}"
+    assert cost == 5, print(f"Test 2 FAILED: expected 5, got {cost}")
     print(f"  Test 2 passed  cost={cost}  order={order}")
 
     # Test 3: No valid path to exit. Must return (inf, []).

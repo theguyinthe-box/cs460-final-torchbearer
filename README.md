@@ -25,7 +25,7 @@ Different permutations of the orders of relics produce different fuel costs, so 
 
 | Source Node Type | Why it is a source |
 |---|---|
-| spawn | starting poin need shortest paths from S to all relics and exit for routing decision making |
+| spawn | starting point need shortest paths from S to all relics and exit for routing decision making |
 | relics | ojectives. need shortest paths from each relic to remaining relics and exit for routing decision making |
 | exit | the exit. need shortest paths from exit to verify that tourchbearer can reach the exit |
 
@@ -109,22 +109,20 @@ Finding the guaranteed shortest path distances means that torchbearer will evalu
 
 ### Part 5b: Data Structure for Visited Relics
 
-> Fill in the table.
-
 | Property | Your answer |
 |---|---|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Data structure chosen | set |
+| Operation: check if relic already collected | Time complexity: O(1) |
+| Operation: mark a relic as collected | Time complexity: O(1) |
+| Operation: unmark a relic (backtrack) | Time complexity: O(1) |
+| Why this structure fits | BnB adds and removes relics several times dirring backtracking operations. Python SET provides O(1) operations for check/add/remove operations |
 
 ### Part 5c: Worst-Case Search Space
 
 > Two bullets.
 
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:** $K!$ where $K$ is the number of relics
+- **Why:** Worst case ontario, the algorithm prunes exactly zero branches and torchbearer explores every possible permutation of relic visiting orders before it actually determines the best possible route. 
 
 ---
 
@@ -132,25 +130,21 @@ Finding the guaranteed shortest path distances means that torchbearer will evalu
 
 ### Part 6a: Best-So-Far Tracking
 
-> Three bullets.
-
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** minimum fuel cost already determined and the list of current finalized relics
+- **When it is used:** when each route hits the exit-node base case with all relics visited, the total cost of the current branch is compared to current best
+- **What it allows the algorithm to skip:** all partial paths where cost_so_far + low_bound is >= best. not like they can hope to beat it anyway. 
 
 ### Part 6b: Lower Bound Estimation
 
 > Three bullets.
 
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** current location, remaining relics, and cummulative cost.
+- **What the lower bound accounts for:** the sum of lowest costs from the current relic to each unvisted relic and the lowest cost from current relic to the exit.
+- **Why it never overestimates:** low_bound assumes 1) that all weights are non-negative, so 0 is the least possible infimum. 2) relics can all be visited at the same time. That is impossible, but that also means that low_bound \le \forall completion cost, so it's an admissable bound. 
 
 ### Part 6c: Pruning Correctness
 
-> One to two bullets. Explain why pruning is safe.
-
-- _Your answer here._
+if cost_so_for + low_bound >= best[0], then all possible complete paths in the current branch with have cost >= best[0]. therefore the alogorithm can prune without missing the optimal solution.
 
 ---
 
@@ -158,4 +152,5 @@ Finding the guaranteed shortest path distances means that torchbearer will evalu
 
 > Bullet list. If none beyond lecture notes, write that.
 
-- _Your references here._
+- https://artint.info/html1e/ArtInt_63.html
+- https://docs.python.org/3/tutorial/datastructures.html (for Sets, lists, and Dicts)
