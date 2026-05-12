@@ -35,24 +35,38 @@ but I had garlic naan calling my name like a siren.
 
 Implement phase 2.
 
-  File "/media/theguyinthe_box/Syncthing/Sync/2026-SPRING/CS460-Final/SP26FinalExam460/torchbearer.py", line 272, in _explore
+  File "./SP26FinalExam460/torchbearer.py", line 272, in _explore
     low_bound += dist_table(current_loc).get(exit_node, float('int'))
                  ~~~~~~~~~~^^^^^^^^^^^^^
 TypeError: 'dict' object is not callable
 Fix : brackets, not parentheses
 
-  File "/media/theguyinthe_box/Syncthing/Sync/2026-SPRING/CS460-Final/SP26FinalExam460/torchbearer.py", line 273, in _explore
+  File "./SP26FinalExam460/torchbearer.py", line 273, in _explore
     low_bound += dist_table[current_loc].get(exit_node, float('int'))
                                                         ~~~~~^^^^^^^
 ValueError: could not convert string to float: 'int'
 fix: inf not int
 
-  File "/media/theguyinthe_box/Syncthing/Sync/2026-SPRING/CS460-Final/SP26FinalExam460/torchbearer.py", line 286, in _explore
+  File "./SP26FinalExam460/torchbearer.py", line 286, in _explore
     relics_visited_order.add(next)
     ^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'list' object has no attribute 'add'
 
+  File "./SP26FinalExam460/torchbearer.py", line 297, in _explore
+    relics_remaining.add(next)
+    ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'add'
+
 fix: replace add with append
+
+Traceback (most recent call last):
+  File "/media/theguyinthe_box/Syncthing/Sync/2026-SPRING/CS460-Final/SP26FinalExam460/torchbearer.py", line 391, in <module>
+    _run_tests()
+    ~~~~~~~~~~^^
+  File "/media/theguyinthe_box/Syncthing/Sync/2026-SPRING/CS460-Final/SP26FinalExam460/torchbearer.py", line 343, in _run_tests
+    assert cost == 4, f"Test 1 FAILED: expected 4, got {cost}"
+           ^^^^^^^^^
+AssertionError: Test 1 FAILED: expected 4, got 6
 
 ---
 

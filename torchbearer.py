@@ -294,7 +294,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,cos
                      best)
             
             relics_visited_order.pop()
-            relics_remaining.add(next)
+            relics_remaining.append(next)
 
 # =============================================================================
 # PIPELINE
