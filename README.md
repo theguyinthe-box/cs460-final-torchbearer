@@ -40,10 +40,10 @@ Different permutations of the orders of relics produce different fuel costs, so 
 
 ### Part 2c: Precomputation Complexity
 
-- **Number of Dijkstra runs:** k + 2 where k is the number of relic nodes plus start node and exit node. 
+- **Number of Dijkstra runs:** k + 1 where k is the number of relic nodes plus start node and exit node. 
 - **Cost per run:** O(m log n)
-- **Total complexity:** O((k+2)m log n) = O(km log n)
-- **Justification (one line):** Dijkstra runs from k+2 sources: spawn, exit_node, and k relic nodes. Each run processes all edges within a heap operation. 
+- **Total complexity:** O((k+1)m log n) = O(km log n)
+- **Justification (one line):** Dijkstra runs from k+1 sources: spawn and k relic nodes. Each run processes all edges within a heap operation. 
 
 ---
 

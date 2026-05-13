@@ -102,6 +102,8 @@ Anyway, it was a fun assignment. neat to think about. maybe consider A* and dijk
 
 yeah, I came back to make some tests, somethings not sitting right with me.
 
+added _run_my_tests():
+
 inserting this: 
 graph_6 = {
         'S': [('A', 3), ('B', 3)],
@@ -123,19 +125,7 @@ and  S->B->A->T = 3 + 1 + 10 = 14 baaad
 
 found a low_bound bug. changed low_bound to grab the minimum cost of relic in relics_remaining. then add minimum cost relic->exit_node in relics_remaining. 
 
-phew, glad I came back and tested. 
-
-Gonna try to cook up a genuinely difficult test case. 
-
-graph_hard = {
-    'S': [('A', 2), ('B', 10)],
-    'A': [('B', 1), ('T', 999)],   # going A->T directly is a disaster
-    'B': [('T', 1)],
-    'T': []
-}
-
-
-
+final submission for realsies this time. 
 
 ---
 
