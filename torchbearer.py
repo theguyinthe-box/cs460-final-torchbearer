@@ -255,7 +255,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,cos
 
     REQUIRED: Add a 1-2 sentence comment near your pruning condition
     explaining why it is safe (cannot skip the optimal solution).
-    This comment is graded. *raspberries* 
+    This comment is graded.
     """
 
     #base case: torchbearer goto exit after visiting all relics. 

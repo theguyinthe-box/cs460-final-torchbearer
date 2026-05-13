@@ -52,7 +52,7 @@ Different permutations of the orders of relics produce different fuel costs, so 
 ### Part 3a: What the Invariant Means
 
 - **For nodes already finalized (in S):**
-  A finalized node's distance is the true shortest path from the sources.
+  A finalized node's distance is the true shortest path from source X to the finalized node.
 
 - **For nodes not yet finalized (not in S):**
   The value of a not finalized node is the cheapest path which torchbearer has already discovered which only uses finalized nodes as its intermediate stops. 
