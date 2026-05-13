@@ -103,7 +103,7 @@ Finding the guaranteed shortest path distances means that torchbearer will evalu
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
 | Current location | current_loc | node | current node being consdiered by torchbearer |
-| Relics already collected | relics_visited_order | list | list of finalized order of relics to visit |
+| Relics already collected | relics_remaining | set | set of relics to be collected |
 | Fuel cost so far | cost_so_far | float | cost of fuel in current branching algorithm |
 
 ### Part 5b: Data Structure for Visited Relics
@@ -114,7 +114,7 @@ Finding the guaranteed shortest path distances means that torchbearer will evalu
 | Operation: check if relic already collected | Time complexity: O(1) |
 | Operation: mark a relic as collected | Time complexity: O(1) |
 | Operation: unmark a relic (backtrack) | Time complexity: O(1) |
-| Why this structure fits | BnB adds and removes relics several times dirring backtracking operations. Python SET provides O(1) operations for check/add/remove operations |
+| Why this structure fits | BnB adds and removes relics several times during backtracking operations. Python SET provides O(1) operations for check/add/remove operations |
 
 ### Part 5c: Worst-Case Search Space
 
@@ -138,12 +138,14 @@ Finding the guaranteed shortest path distances means that torchbearer will evalu
 > Three bullets.
 
 - **What information is available at the current state:** current location, remaining relics, and cummulative cost.
-- **What the lower bound accounts for:** the sum of lowest costs from the current relic to each unvisted relic and the lowest cost from current relic to the exit.
-- **Why it never overestimates:** low_bound assumes 1) that all weights are non-negative, so 0 is the least possible infimum. 2) relics can all be visited at the same time. That is impossible, but that also means that low_bound \le \forall completion cost, so it's an admissable bound. 
+- **What the lower bound accounts for:** the sum of lowest cost from the current relic to each unvisted relic and the lowest cost from each unvisited relic to the exit.
+- **Why it never overestimates:** low_bound assumes 
+1) that all weights are non-negative, so 0 is the infimum of the set of all possible costs (eg: low_bound = 0). 
+2) that the sum of the lowest cost relic to the lowest cost exit from all possible next relics is the lowest possible cost that could occur next.  
 
 ### Part 6c: Pruning Correctness
 
-if cost_so_for + low_bound >= best[0], then all possible complete paths in the current branch with have cost >= best[0]. therefore the alogorithm can prune without missing the optimal solution.
+if cost_so_far + low_bound >= best[0], then all possible complete paths in the current branch will have cost >= best[0]. therefore the algorithm can prune without missing the optimal solution.
 
 ---
 

@@ -55,7 +55,7 @@ def select_sources(spawn, relics, exit_node):
     list[node]
         No duplicates. Order does not matter.
     """
-    sources = [spawn, exit_node] + relics
+    sources = set([spawn, exit_node] + relics)
     return sources
 
 
@@ -211,11 +211,15 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
         #no relics/relics empty, poor torchbearer just go from start to exit and calls it a day
         cost = dist_table[spawn].get(exit_node,float('inf'))
         return (cost,[])
+    
+    # if no route to 
+    if dist_table[spawn].get(exit_node, float('inf')) == float('inf'):
+        return (float('inf'), [])
 
     #initialize best with a 'NULL' or inf value and an empty list to insert jun...I mean relics into
     best = [float('inf'), []] 
 
-    remaining_relix = relics
+    remaining_relix = set(relics)
     _explore(dist_table,
              spawn,
              remaining_relix,
@@ -266,14 +270,18 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,cos
             best[1] = relics_visited_order[:]
         return
     
-    #determine minimum cost to finish in this current 
+    #reset/initialize the low_bound
     low_bound = 0
-    for relic in relics_remaining:
-        min_cost = dist_table[current_loc].get(relic,float('inf'))
-        low_bound += min_cost
-    low_bound += dist_table[current_loc].get(exit_node, float('inf'))
+    #determine minimum cost to next relic in this current 
+    low_bound = min(dist_table[current_loc].get(relic,float('inf')) for relic in relics_remaining)
+    low_bound += min(dist_table[relic].get(exit_node, float('inf')) for relic in relics_remaining)
 
     #pruning if current branch >= best[0]
+    '''if cost_so_far + low_bound >= best[0], 
+       then all possible complete paths in the current branch 
+       have cost >= best[0]. 
+       therefore the algorithm can prune 
+       without missing the optimal solution.'''
     if cost_so_far + low_bound >= best[0]:
         return
     
@@ -295,7 +303,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,cos
                      best)
             
             relics_visited_order.pop()
-            relics_remaining.append(next)
+            relics_remaining.add(next)
 
 # =============================================================================
 # PIPELINE
@@ -323,12 +331,36 @@ def solve(graph, spawn, relics, exit_node):
     #dist_tbl = precompute_distances(graph,spawn,relics,exit_node)
     return find_optimal_route(precompute_distances(graph,spawn,relics,exit_node),spawn,relics,exit_node)
 
+def _run_my_tests():
+    graph_6 = {
+        'S': [('A', 3), ('B', 3)],
+        'A': [('B', 1), ('T', 10)],
+        'B': [('A', 1), ('T', 1)],
+        'T': [] 
+    }
+    cost, order = solve(graph_6, 'S', ['A', 'B'], 'T')
+    assert cost == 5, f"Test 6 FAILED: expected 5, got {cost}"
+    print(f"  Test 6 passed  cost={cost}  order={order}")
+
+    #with vocoder and a little funk: ONE MORE TIME
+    graph_hard = {
+        'S': [('A', 2), ('B', 10)],
+        'A': [('B', 1), ('T', 999)],   # going A->T directly is a disaster
+        'B': [('T', 1)],
+        'T': []
+    }
+
+    cost, order = solve(graph_hard, 'S', ['A', 'B'], 'T')
+    assert cost == 4, f"FAILED: expected 4, got {cost} | order={order}"
+    print(f"  Test 7 passed: cost={cost} order={order}")
+
+    print("\nAll user defined tests passed.")
+
 
 # =============================================================================
 # PROVIDED TESTS (do not modify)
 # Graders will run additional tests beyond these.
 # =============================================================================
-
 def _run_tests():
     print("Running provided tests...")
 
@@ -341,7 +373,7 @@ def _run_tests():
         'T': []
     }
     cost, order = solve(graph_1, 'S', ['B', 'C', 'D'], 'T')
-    assert cost == 4, print(f"Test 1 FAILED: expected 4, got {cost}")
+    assert cost == 4, f"Test 1 FAILED: expected 4, got {cost}"
     print(f"  Test 1 passed  cost={cost}  order={order}")
 
     # Test 2: Single relic. Optimal cost = 5.
@@ -351,7 +383,7 @@ def _run_tests():
         'T': []
     }
     cost, order = solve(graph_2, 'S', ['R'], 'T')
-    assert cost == 5, print(f"Test 2 FAILED: expected 5, got {cost}")
+    assert cost == 5, f"Test 2 FAILED: expected 5, got {cost}"
     print(f"  Test 2 passed  cost={cost}  order={order}")
 
     # Test 3: No valid path to exit. Must return (inf, []).
@@ -378,6 +410,8 @@ def _run_tests():
     assert cost == 6, f"Test 4 FAILED: expected 6, got {cost}"
     print(f"  Test 4 passed  cost={cost}  order={order}")
 
+    
+
     # Test 5: Explanation functions must return non-placeholder strings.
     for fn in [explain_problem, dijkstra_invariant_check, explain_search]:
         result = fn()
@@ -387,6 +421,6 @@ def _run_tests():
 
     print("\nAll provided tests passed.")
 
-
 if __name__ == "__main__":
     _run_tests()
+    _run_my_tests()

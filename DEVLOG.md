@@ -96,6 +96,50 @@ I'll turn this in in the morning after one last look over for completeness, but 
 Anyway, it was a fun assignment. neat to think about. maybe consider A* and dijkstra's comparison in a future class since both with branch and bounding. A* should do better, but you gotta introduce heuristics which I understand might be outside the scope of the class.
 ---
 
+---
+
+## Entry 5 – May 12 5:51pm: Cleanup and Final Review.
+
+yeah, I came back to make some tests, somethings not sitting right with me.
+
+inserting this: 
+graph_6 = {
+        'S': [('A', 3), ('B', 3)],
+        'A': [('B', 1), ('T', 10)],
+        'B': [('A', 1), ('T', 1)],
+        'T': [] 
+    }
+
+so 
+
+f\t | A | B | T |
+|---|---|---|---|
+| S | 3 | 3 | x |
+| A | x | 1 | 10 |
+| B | 1 | x | 1 |
+
+then S->A->B->T = 3 + 1 + 1 = 5 optimal
+and  S->B->A->T = 3 + 1 + 10 = 14 baaad
+
+found a low_bound bug. changed low_bound to grab the minimum cost of relic in relics_remaining. then add minimum cost relic->exit_node in relics_remaining. 
+
+phew, glad I came back and tested. 
+
+Gonna try to cook up a genuinely difficult test case. 
+
+graph_hard = {
+    'S': [('A', 2), ('B', 10)],
+    'A': [('B', 1), ('T', 999)],   # going A->T directly is a disaster
+    'B': [('T', 1)],
+    'T': []
+}
+
+
+
+
+---
+
+
 ## Final Entry – May 12 2:26am: Time Estimate
 
 
